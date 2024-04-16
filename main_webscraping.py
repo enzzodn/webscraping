@@ -1,0 +1,3 @@
+from src.controller import controller_webscraping as botwebscraping
+
+botwebscraping
