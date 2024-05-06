@@ -5,10 +5,17 @@ from email.mime.text import MIMEText
 import logging
 import os
 
-def enviar_email(email_sender, senha_sender, email_receiver, parts, logo):       
+senha = open('C:/Users/enzzo.nogueira/Desktop/webscraping/senha.txt', 'r')
+linha = senha.readlines()
+senha.close()
+
+
+def enviar_email(email_receiver, parts):       
     # ----- VARIAVEIS -----
     host = 'smtp.gmail.com'
     port = '587'
+    email_sender = 'enzzodev@gmail.com'
+    senha_sender = linha[0]
 
     # ----- CONEXÃO -----
     server = smtplib.SMTP(host, port)
@@ -19,7 +26,8 @@ def enviar_email(email_sender, senha_sender, email_receiver, parts, logo):
     msg = MIMEMultipart()
     subject = 'BOT - PROJETO WEB SCRAPING'
     body = f"""
-    <h2>{parts[0]}</h2> <img src = "cid:python_logo" alt = "Logo Python">
+    <h2>{parts[0]}</h2>
+    <img src = "cid:logo_python" alt = "Logo Python">
     <p>{parts[1]}</p>
     <p>{parts[2]}</p>
     <p>{parts[3]}</p>
@@ -34,11 +42,11 @@ def enviar_email(email_sender, senha_sender, email_receiver, parts, logo):
     msg['To'] = email_receiver
     msg['Subject'] = subject
 
-    image = open('C:/logo_python.png', 'rb')
+    image = open('C:/Users/enzzo.nogueira/Desktop/logo_python.png', 'rb')
     msg_image = MIMEImage(image.read())
     image.close()
 
-    msg_image.attach('Content-ID', '<Logo Python>')
+    msg_image.add_header('Content-ID', '<logo_python>')
     msg.attach(msg_image)
 
     msg.attach(MIMEText(body, 'html'))
@@ -50,4 +58,4 @@ def enviar_email(email_sender, senha_sender, email_receiver, parts, logo):
     print(f"-- EMAIL ENVIADO COM SUCESSO PARA: {email_receiver} --\n")
     server.quit()
 
-    os.remove('C:/logo_python.png')
+    os.remove('C:/Users/enzzo.nogueira/Desktop/logo_python.png')
