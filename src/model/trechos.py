@@ -17,7 +17,7 @@ def trechos():
 
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/table[1]/tbody/tr[2]/th/small/span/a/img')))
     logo = driver.find_element(By.XPATH, '/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/table[1]/tbody/tr[2]/th/small/span/a/img')
-    logo.screenshot('C:/Users/enzzo.nogueira/Desktop/logo_python.png')
+    logo.screenshot('logo_python.png')
 
     for i in range(4):
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, f'/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/p[{i+1}]')))

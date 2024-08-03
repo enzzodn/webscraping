@@ -2,10 +2,9 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
-import logging
 import os
 
-senha = open('C:/Users/enzzo.nogueira/Desktop/webscraping/senha.txt', 'r')
+senha = open('senha.txt', 'r')
 linha = senha.readlines()
 senha.close()
 
@@ -42,7 +41,7 @@ def enviar_email(email_receiver, parts):
     msg['To'] = email_receiver
     msg['Subject'] = subject
 
-    image = open('C:/Users/enzzo.nogueira/Desktop/logo_python.png', 'rb')
+    image = open('logo_python.png', 'rb')
     msg_image = MIMEImage(image.read())
     image.close()
 
@@ -52,10 +51,9 @@ def enviar_email(email_receiver, parts):
     msg.attach(MIMEText(body, 'html'))
 
     # ----- ENVIO DO EMAIL -----
-    logging.info('-- ENVIANDO EMAIL --')
     server.sendmail(msg['From'], msg['To'], msg.as_string())
         
     print(f"-- EMAIL ENVIADO COM SUCESSO PARA: {email_receiver} --\n")
     server.quit()
 
-    os.remove('C:/Users/enzzo.nogueira/Desktop/logo_python.png')
+    os.remove('logo_python.png')
